@@ -1,0 +1,74 @@
+# 📅 Docker Day 5 – Volumes and Networking
+# 👨‍💻 By: Ramesh Vutukuri
+# 🎯 Goal: Understand Docker volumes for persistent data and Docker networks for container-to-container communication
+
+# ----------------------------------------------------------
+# ✅ PART 1: Docker Volumes – Store Persistent Data
+
+# Create a volume
+docker volume create mydata
+
+# Inspect volume path (host-side storage location)
+docker volume inspect mydata
+
+# Run container with volume mounted
+docker run -d --name voltest -v mydata:/app nginx
+
+# Go inside container and create a file
+docker exec -it voltest bash
+cd /app
+echo "Docker Volume Test" > volume.txt
+exit
+
+# Delete the container
+docker rm -f voltest
+
+# Verify volume still holds data
+docker run -it --rm -v mydata:/app alpine cat /app/volume.txt
+# ✅ Output: Docker Volume Test (data persisted even after container deletion)
+
+# ----------------------------------------------------------
+# ✅ PART 2: Docker Networks – Container Communication
+
+# Create a custom Docker network
+docker network create devnet
+
+# Run first container in that network
+docker run -d --name app1 --network devnet nginx
+
+# Run second container in the same network
+docker run -dit --name app2 --network devnet busybox sh
+
+# Go inside app2 and ping app1 by name
+docker exec -it app2 sh
+ping app1
+exit
+
+# ✅ Result: Successful ping using container DNS
+
+# ----------------------------------------------------------
+# ❌ Common Errors & Fixes
+
+# ❗ Container exited immediately (BusyBox or Alpine)
+# 🔧 Use `-dit` and specify `sh` or `sleep` to keep it alive
+
+# Example:
+docker run -dit --name app2 --network devnet busybox sh
+
+# ❗ Name conflict error
+# 🔧 Remove old container or use a different name
+docker rm -f app2
+
+# ----------------------------------------------------------
+# 🧠 Interview Tips:
+
+# Q: What is a Docker volume and why is it used?
+# A: A volume is external persistent storage for containers. It's useful for logs, database data, configs, and user files.
+
+# Q: How do containers communicate securely?
+# A: Use a Docker custom bridge network. Containers in the same network can talk using container names due to Docker’s internal DNS.
+
+# ----------------------------------------------------------
+# ✅ Status: Docker Day 5 Completed
+# 🗂️ File saved: ~/docker-practice/day5.txt
+

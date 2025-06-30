@@ -1,0 +1,27 @@
+# 📦 Installed Docker on Ubuntu
+sudo apt update
+sudo apt install docker.io -y
+
+# 🔄 Started Docker service
+sudo systemctl start docker
+sudo systemctl enable docker
+
+# 👤 Added user to docker group
+sudo usermod -aG docker $USER
+
+# 🐳 Ran hello-world to test Docker
+docker run hello-world
+
+# 📥 Pulled nginx image
+docker pull nginx
+
+# 🚀 Ran nginx container on port 80
+docker run -d -p 80:80 nginx
+
+# 📊 Checked running containers
+docker ps
+
+# 🧼 Stopped and removed container (optional)
+docker stop <container_id>
+docker rm <container_id>
+

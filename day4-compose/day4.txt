@@ -1,0 +1,67 @@
+# 📅 Docker Day 4 – Docker Compose Practice
+# 👨‍💻 By: Ramesh Vutukuri
+# 🎯 Goal: Practice building and running a custom Nginx app using Docker Compose
+
+# --------------------------------------------
+# ✅ Step 1: Create a working directory
+mkdir -p ~/docker-practice/day4-compose
+cd ~/docker-practice/day4-compose
+
+# ✅ Step 2: Create custom HTML page
+nano index.html
+# <h1>Hello from Docker Compose - Ramesh</h1>
+
+# ✅ Step 3: Create Dockerfile
+nano Dockerfile
+# FROM nginx:latest
+# COPY index.html /usr/share/nginx/html/index.html
+
+# ✅ Step 4: Create docker-compose.yml
+nano docker-compose.yml
+
+# YAML Content:
+version: '3'
+services:
+  web:
+    build: .
+    ports:
+      - "8080:80"
+    container_name: ramesh-nginx
+
+# --------------------------------------------
+# 🧠 Explanation of docker-compose.yml
+
+# version: '3'            → Compose file format version
+# services:               → Define one or more containers
+# web:                    → Name of the service (this will become the container name)
+# build: .                → Build Dockerfile from current folder
+# ports: "8080:80"        → Map host 8080 to container 80
+# container_name:         → Assign custom name to container
+
+# --------------------------------------------
+# ✅ Step 5: Build and run using Docker Compose
+docker compose up -d
+
+# ✅ Step 6: Verify running container
+docker ps
+
+# ✅ Step 7: Open in browser
+# http://localhost:8080 (on laptop)
+# or
+# http://<your-ec2-ip>:8080 (on EC2)
+
+# ✅ Step 8: Stop and clean containers
+docker compose down
+
+# --------------------------------------------
+# 🧹 Cleanup (Optional)
+docker system prune -a --volumes
+
+# --------------------------------------------
+# 💡 Interview Tip:
+# "Docker Compose helps manage multi-container apps in a single YAML file.
+# It's commonly used in DevOps pipelines for local dev, CI/CD, and staging."
+
+# ✅ Status: Docker Day 4 Completed
+# 📁 File Saved: ~/docker-practice/day4-compose/day4.txt
+

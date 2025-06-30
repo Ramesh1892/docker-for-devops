@@ -1,0 +1,81 @@
+# 📅 Docker Day 3 - Volumes, ENV Variables, CMD & Clean-up
+# 👨‍💻 By: Ramesh Vutukuri
+# 🐳 Focus: Hands-on with Docker Volumes, ENV usage, script-based containers, cleanup commands
+
+# ----------------------------------------
+# ✅ 1. Create a working directory
+mkdir -p ~/docker-practice/day3
+cd ~/docker-practice/day3
+
+# ✅ 2. Run nginx with a volume
+docker run -d -p 8080:80 -v mydata:/usr/share/nginx/html nginx
+# ➤ Serves Nginx site on localhost:8080
+# ➤ Uses named volume 'mydata' for persistent content
+
+# ✅ 3. Access and modify volume content
+docker ps                            # Get container ID
+docker exec -it <container_id> bash
+cd /usr/share/nginx/html
+echo "Hello from Docker Volume" > index.html
+exit
+
+# ✅ 4. Create script to test ENV variable
+nano env-test.sh
+# ➤ Content:
+# #!/bin/sh
+# echo "Hello, $USERNAME"
+
+chmod +x env-test.sh
+
+# ✅ 5. Dockerfile using ENV and CMD
+nano Dockerfile
+# ➤ Content:
+# FROM alpine
+# COPY env-test.sh /env-test.sh
+# RUN chmod +x /env-test.sh
+# ENV USERNAME=Ramesh
+# CMD ["/env-test.sh"]
+
+# ✅ 6. Build image
+docker build -t env-test .
+
+# ✅ 7. Run the image
+docker run env-test
+# ➤ Expected Output: Hello, Ramesh
+
+# ✅ 8. View output logs (if container exits quickly)
+docker ps -a
+docker logs <container_id>
+
+# ✅ 9. (Optional) Keep container running for debug
+# ➤ Add 'sleep 60' in script after echo
+
+# ----------------------------------------
+# 🧹 Docker Cleanup Commands
+
+# ✅ Stop all running containers
+docker stop $(docker ps -q)
+
+# ✅ Remove all containers
+docker rm $(docker ps -aq)
+
+# ✅ Remove all images
+docker rmi $(docker images -q)
+
+# ✅ Complete system cleanup (with volumes)
+docker system prune -a --volumes
+# ⚠️ Use carefully: deletes all containers, images, volumes, cache
+
+# ✅ Show current usage before pruning
+docker system df
+
+# ----------------------------------------
+# 💡 Interview Tips:
+# - Volumes are used to store data across container restarts (e.g., MySQL, Jenkins configs)
+# - ENV and CMD allow you to customize behavior and startup logic
+# - Script-based containers are common for CI jobs and automation
+# - Cleanup skills are essential in resource-constrained or CI environments
+
+# ✅ Status: Docker Day 3 Completed
+# 📁 Saved as: ~/docker-practice/day3.txt
+
