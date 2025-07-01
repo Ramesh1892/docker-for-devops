@@ -1,19 +1,18 @@
-# Docker for DevOps – Practice by Ramesh Vutukuri
+# Docker for DevOps 🚀
 
-📦 This repository contains hands-on Docker practice organized day by day.
+This is my personal Docker practice repo, structured day by day to reflect real-world DevOps workflows.
 
-## 📅 Practice Breakdown
+## 📘 What’s Inside
 
-- ✅ Day 1: Docker Installation & Basic Commands
-- ✅ Day 2: Containers, Images, and Nginx Demo
-- ✅ Day 3: Docker Volumes & Environment Variables
-- ✅ Day 4: Docker Compose and Multi-container Apps
-- ✅ Day 5: Docker Networking, Bridge, Custom Networks
+| Day | Topic                               |
+|-----|-------------------------------------|
+| Day 1 | Docker Installation & Hello World |
+| Day 2 | Images, Containers, `docker run` |
+| Day 3 | Volumes, ENV, CMD                |
+| Day 4 | Docker Compose: Nginx + Redis     |
+| Day 5 | ENV vars, Expose, Cleanup         |
+| Day 6 | Compose: Nginx + MySQL + Network  |
 
-## 📘 Each day contains:
-- Commands used
-- Explanations
-- Hands-on outputs
+## 📂 Folder Structure
 
-🧑‍💻 Built step-by-step as part of my DevOps learning journey.
 
