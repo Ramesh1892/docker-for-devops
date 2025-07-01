@@ -1,0 +1,96 @@
+# 📅 Docker Day 6 – Multi-Container Setup Using Docker Compose
+# 👨‍💻 By: Ramesh Vutukuri
+# 🧩 Use Case: Running a web app (Nginx) and database (MySQL) together
+
+## ✅ Objective:
+Build a real-world stack using Docker Compose with:
+- A web server (nginx)
+- A database (MySQL)
+- A shared Docker network
+- Volumes for data persistence
+
+---
+
+## 📁 Folder Structure:
+~/docker-for-devops/day6-compose/
+└── docker-compose.yml
+└── docker-day6.txt
+
+---
+
+## 🧱 Docker Compose File: `docker-compose.yml`
+
+```yaml
+version: "3.8"
+
+services:
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: appdb
+    volumes:
+      - dbdata:/var/lib/mysql
+    networks:
+      - appnet
+
+  web:
+    image: nginx
+    ports:
+      - "8080:80"
+    depends_on:
+      - db
+    networks:
+      - appnet
+
+volumes:
+  dbdata:
+
+networks:
+  appnet:
+
+
+
+
+🔧 Commands Practiced:
+
+✅ Run the stack in background (detached mode)
+
+docker compose up -d
+
+✅ Check running containers
+
+docker ps
+
+✅ Access Nginx from browser
+
+http://localhost:8080
+
+✅ Test MySQL connection from another container:
+
+docker run -it --rm --network day6-compose_appnet ubuntu bash
+apt update && apt install mysql-client -y
+mysql -h db -u root -p
+# password: rootpass
+→ Issue faced: Access denied (1045)
+→ Fixed by typing correct password: rootpass
+→ Also tested with:
+mysql -h db -u root -p'rootpass'
+
+✅ Successfully connected to MySQL from another container via network
+
+🧹 Cleanup
+
+docker compose down -v
+
+ Stops containers and deletes volume dbdata
+
+📝 Summary:
+
+✅ Built a 2-container system using Compose
+✅ Verified inter-container communication
+✅ Used environment variables, named volume, and custom network
+✅ Faced & fixed MySQL access errors
+✅ Saved all steps and testing results in professional format
+
+
