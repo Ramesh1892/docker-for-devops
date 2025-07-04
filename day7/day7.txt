@@ -1,0 +1,6 @@
+# Docker Compose Day 7
+- Created multi-container app using docker-compose.yml
+- Services: nginx (web) and redis (cache)
+- Connected both containers in a single network
+- Mounted volume to serve custom web content
+
