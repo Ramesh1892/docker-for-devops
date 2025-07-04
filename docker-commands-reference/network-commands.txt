@@ -1,0 +1,21 @@
+# List Docker networks
+docker network ls
+
+# Create a bridge network
+docker network create mynet
+
+# Run container in custom network
+docker run -d --name app1 --network mynet nginx
+
+# Connect existing container to network
+docker network connect mynet container_id
+
+# Disconnect container from network
+docker network disconnect mynet container_id
+
+# Inspect network details
+docker network inspect mynet
+
+# Ping between containers in same network
+docker exec -it container1 ping container2
+

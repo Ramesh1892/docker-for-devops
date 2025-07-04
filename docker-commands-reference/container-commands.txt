@@ -1,0 +1,33 @@
+# Run container with a name
+docker run --name myweb nginx
+
+# Run in detached mode (background)
+docker run -d nginx
+
+# Run with port mapping
+docker run -d -p 8080:80 nginx
+
+# Run interactively with shell access
+docker run -it ubuntu bash
+
+# List running containers
+docker ps
+
+# List all containers (running + exited)
+docker ps -a
+
+# Stop a container
+docker stop container_id
+
+# Start a stopped container
+docker start container_id
+
+# Remove a container
+docker rm container_id
+
+# Get container logs
+docker logs container_id
+
+# Execute command inside running container
+docker exec -it container_id bash
+

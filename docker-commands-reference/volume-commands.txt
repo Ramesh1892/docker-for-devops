@@ -1,0 +1,18 @@
+# List Docker volumes
+docker volume ls
+
+# Create a volume
+docker volume create myvol
+
+# Inspect volume details
+docker volume inspect myvol
+
+# Use volume in a container
+docker run -v myvol:/data ubuntu
+
+# Remove a volume
+docker volume rm myvol
+
+# Mount local folder as volume
+docker run -v $(pwd):/app ubuntu
+

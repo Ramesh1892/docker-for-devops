@@ -1,0 +1,24 @@
+# List all Docker images
+docker images
+
+# Pull an image from Docker Hub
+docker pull nginx
+
+# Build an image from a Dockerfile
+docker build -t myapp:latest .
+
+# Tag an image
+docker tag myapp:latest myrepo/myapp:v1
+
+# Push image to Docker Hub
+docker push myrepo/myapp:v1
+
+# Remove an image
+docker rmi nginx
+
+# Save an image to tar archive
+docker save -o nginx.tar nginx
+
+# Load image from archive
+docker load -i nginx.tar
+

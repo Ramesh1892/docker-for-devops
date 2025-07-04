@@ -1,0 +1,24 @@
+# Start containers in background
+docker compose up -d
+
+# Start containers with logs in foreground
+docker compose up
+
+# Stop and remove containers
+docker compose down
+
+# View logs from all services
+docker compose logs
+
+# View logs of a specific service
+docker compose logs web
+
+# Restart services
+docker compose restart
+
+# List running compose containers
+docker compose ps
+
+# Execute into a running container
+docker compose exec web bash
+

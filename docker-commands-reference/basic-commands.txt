@@ -1,0 +1,12 @@
+# Show Docker version
+docker version
+
+# Show Docker info
+docker info
+
+# List running containers
+docker ps
+
+# List all containers (including stopped)
+docker ps -a
+
